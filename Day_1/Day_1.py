@@ -3,14 +3,14 @@ from pathlib import Path
 
 def calibrated_val_sum(vals) -> int:
     sum_vals = 0
-    for val in vals.split('\n'):
+    for val in vals:
         if val:
             digits = re.findall(r'\d', val)
             sum_vals += int(digits[0] + digits[-1])
     # return sum(sum_vals) 
     return sum_vals
 
-def calibrated_val_sum_2(vals) -> int:
+def calibrated_val_sum_2(vals:list) -> int:
     digit_dict={
         'one': '1',
         'two': '2',
@@ -35,14 +35,12 @@ def calibrated_val_sum_2(vals) -> int:
                 digits.append(val[digits_s.start():digits_s.end()])
                 pos = digits_s.start() + 1
             if digits:
-                print(digits)
                 for i, digit in enumerate(digits):
                     if digit in digit_dict.keys():
                         digits[i] = digit_dict[digit]
                 sum_vals += int(digits[0] + digits[-1])
     return sum_vals
 
-print("Result 1")
 with open (Path(__file__).parent / 'data/input.txt', 'r') as f:
     print(f"Result 1: {calibrated_val_sum(f.readlines())}")
 
